@@ -17,16 +17,12 @@ export const Navigation = ({ list }) => {
   // Хук useLocation для получения информации о текущем URL
   const location = useLocation();
 
-  // Если путь корневой ("/"), используем "women" по умолчанию
-  const gender = location.pathname.split("/")[1] || "women";
-
   // Эффект, который выполняется при изменении пути или dispatch
   useEffect(() => {
-    // Разбиваем путь на сегменты и извлекаем первый сегмент (например, "women" из "/women/dresses")
-
-    // Отправляем action для установки активного гендера в Redux store
-    dispatch(setActiveGender(gender));
-  }, [gender, dispatch]); // Зависимости: эффект срабатывает при изменении пути или dispatch
+    // Вычисляем gender прямо в эффекте
+    const newGender = location.pathname.split("/")[1] || "women";
+    dispatch(setActiveGender(newGender));
+  }, [location.pathname, dispatch]); // Зависим только от pathname
 
   // Рендер компонента навигации
   return (

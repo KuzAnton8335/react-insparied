@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -6,6 +8,7 @@ import {
 } from "react-router-dom";
 import { ErrorPage } from "./components/ErrorPage/ErrorPage";
 import { MainPage } from "./components/MainPage/MainPage";
+import { fecthNavigation } from "./features/navigationSlice";
 import { Root } from "./routes/Root";
 
 const router = createBrowserRouter(
@@ -22,6 +25,12 @@ const router = createBrowserRouter(
 );
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fecthNavigation);
+  }, [dispatch]);
+
   return <RouterProvider router={router}></RouterProvider>;
 };
 

@@ -1,20 +1,26 @@
 // Импорт библиотеки для условного объединения CSS классов
 import classNames from "classnames";
 // Импорт компонентов для навигации из react-router-dom
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // Импорт CSS модуля для стилизации
+import { useSelector } from "react-redux";
 import style from "./Category.module.scss";
 
 // Компонент Category принимает пропс list с данными категорий
 export const Category = ({ list }) => {
-  // Хук useLocation для получения информации о текущем URL
-  const location = useLocation();
-  // Извлекаем сегмент пути (например, "women" из "/women/dresses")
   // Если путь корневой, используем "women" по умолчанию
-  const gender = location.pathname.split("/")[1] || "women";
+  const gender = useSelector(
+    state => state.rootReducer.navigation.activeGender
+  );
 
   // Находим объект с категориями для текущего гендера
-  const categoriesList = list.find(item => item.link === gender);
+  const categoriesList = list.find(
+    item => item.link === `/${gender}` || item.link === gender
+  );
+
+  if (!categoriesList || !categoriesList.categories) {
+    return <div>Категории не найдены для: {gender}</div>;
+  }
 
   // Рендерим список категорий
   return (

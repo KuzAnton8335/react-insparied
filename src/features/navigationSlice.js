@@ -1,22 +1,50 @@
-// импортируем createSlice
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { CATEGORY_URL } from "../const.js";
+
+export const fecthNavigation = createAsyncThunk(
+  "navigation/fecthNavigation",
+  async () => {
+    try {
+      const response = await fetch(CATEGORY_URL);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Ошибка при выборе навигации:", error);
+      throw error;
+    }
+  }
+);
 
 const navigationSlice = createSlice({
-  name: "navigation", // Уникальное имя слайса
+  name: "navigation",
   initialState: {
-    // Начальное состояние
-    activeGender: "women", // По умолчанию активен раздел "women"
+    activeGender: "women",
+    status: "idle",
+    categories: {},
+    genderList: [],
+    error: null,
   },
   reducers: {
-    // Редукторы (редьюсеры) для обновления состояния
     setActiveGender: (state, action) => {
-      state.activeGender = action.payload; // Обновляем активный раздел
+      state.activeGender = action.payload;
     },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fecthNavigation.pending, state => {
+        state.status = "loading";
+      })
+      .addCase(fecthNavigation.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.categories = action.payload;
+        state.genderList = Object.keys(action.payload);
+      })
+      .addCase(fecthNavigation.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 
-// Экспорт action creator'а для диспетчеризации действий
 export const { setActiveGender } = navigationSlice.actions;
-
-// Экспорт редьюсера для подключения к хранилищу
 export default navigationSlice.reducer;

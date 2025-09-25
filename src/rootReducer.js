@@ -1,4 +1,4 @@
-import { combineReducers } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
 import navigationReducer from "./features/navigationSlice";
 
 export const rootReducer = combineReducers({
