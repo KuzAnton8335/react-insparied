@@ -7,31 +7,20 @@ import { useSelector } from "react-redux";
 import style from "./Category.module.scss";
 
 // Компонент Category принимает пропс list с данными категорий
-export const Category = ({ list }) => {
+export const Category = () => {
   // Если путь корневой, используем "women" по умолчанию
-  const gender = useSelector(
-    state => state.rootReducer.navigation.activeGender
-  );
-
-  // Находим объект с категориями для текущего гендера
-  const categoriesList = list.find(
-    item => item.link === `/${gender}` || item.link === gender
-  );
-
-  if (!categoriesList || !categoriesList.categories) {
-    return <div>Категории не найдены для: {gender}</div>;
-  }
+  const { activeGender, categories } = useSelector(state => state.navigation);
 
   // Рендерим список категорий
   return (
     <ul className={style.category}>
       {/* Маппим массив категорий в элементы списка */}
-      {categoriesList.categories.map(item => (
-        <li key={item.link} className={style.item}>
+      {categories[activeGender]?.list?.map(item => (
+        <li key={item.slug} className={style.item}>
           {/* NavLink для навигации с автоматическим определением активного состояния */}
           <NavLink
             // Формируем путь: /gender/category (например: /women/dresses)
-            to={`${gender}/${item.link}`}
+            to={`${activeGender}/${item.slug}`}
             // Условное применение стилей: обычная ссылка и активная ссылка
             className={({ isActive }) =>
               classNames(style.link, isActive && style.linkActive)

@@ -4,14 +4,9 @@ import { CATEGORY_URL } from "../const.js";
 export const fecthNavigation = createAsyncThunk(
   "navigation/fecthNavigation",
   async () => {
-    try {
-      const response = await fetch(CATEGORY_URL);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Ошибка при выборе навигации:", error);
-      throw error;
-    }
+    const response = await fetch(CATEGORY_URL);
+    const data = await response.json();
+    return data;
   }
 );
 

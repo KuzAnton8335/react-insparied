@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { ErrorPage } from "./components/ErrorPage/ErrorPage";
 import { MainPage } from "./components/MainPage/MainPage";
-import { fecthNavigation } from "./features/navigationSlice";
+import { fecthNavigation } from "./features/navigationSlice.js";
 import { Root } from "./routes/Root";
 
 const router = createBrowserRouter(
