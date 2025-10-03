@@ -1,13 +1,34 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Container } from "../../components/Layout/Container/Container";
 
-export const MainPage = ({ gender = "women" }) => {
-  const { category } = useParams();
+import { fetchCategory, fetchGender } from "../../features/goodsSlice";
+import { setActiveGender } from "../../features/navigationSlice";
+import { Goods } from "../Goods/Goods";
+
+export const MainPage = () => {
+  const { gender, category } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setActiveGender(gender));
+  }, [gender, dispatch]);
+
+  useEffect(() => {
+    if (gender && category) {
+      dispatch(fetchCategory({ gender, category }));
+      return;
+    }
+    if (gender) {
+      dispatch(fetchGender(gender));
+      return;
+    }
+  }, [gender, dispatch, category]);
 
   return (
-    <Container>
-      <div>MainPage {gender}</div>
-      {category && <p>Категория: {category}</p>}
-    </Container>
+    <>
+      <div>Баннер</div>
+      <Goods category={category} />
+    </>
   );
 };

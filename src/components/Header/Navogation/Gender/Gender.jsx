@@ -13,7 +13,7 @@ export const Gender = () => {
       {genderList.map(gender => (
         <li key={gender} className={style.item}>
           <NavLink
-            to={gender}
+            to={`/catalog/${gender}`}
             className={({ isActive }) =>
               classNames(
                 style.link,

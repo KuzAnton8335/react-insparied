@@ -20,7 +20,7 @@ export const Category = () => {
           {/* NavLink для навигации с автоматическим определением активного состояния */}
           <NavLink
             // Формируем путь: /gender/category (например: /women/dresses)
-            to={`${activeGender}/${item.slug}`}
+            to={`/catalog/${activeGender}/${item.slug}`}
             // Условное применение стилей: обычная ссылка и активная ссылка
             className={({ isActive }) =>
               classNames(style.link, isActive && style.linkActive)

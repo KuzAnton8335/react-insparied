@@ -1,9 +1,13 @@
 import { default as classnames, default as classNames } from "classnames";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Container } from "../Layout/Container/Container";
 import style from "./Footer.module.scss";
 
-export const Footer = ({ list }) => {
+export const Footer = () => {
+  const { genderList, categories } = useSelector(state => state.navigation);
+  // console.log(genderList);
+  // console.log(categories);
   return (
     <footer>
       <Container>
@@ -13,18 +17,18 @@ export const Footer = ({ list }) => {
               Каталог
             </h2>
             <ul className={style.categoryList}>
-              {list.map(item => (
-                <li key={item.link} className={style.categoryItem}>
+              {genderList.map(gender => (
+                <li key={gender} className={style.categoryItem}>
                   <h3 className={style.categorySubtitle}>
-                    <NavLink to={item.link} className={style.link}>
-                      {item.title}
+                    <NavLink to={`/catalog/${gender}`} className={style.link}>
+                      {categories[gender]?.title}
                     </NavLink>
                   </h3>
                   <ul className={style.categorySublist}>
-                    {item.categories.map(category => (
-                      <li key={category.link}>
+                    {categories[gender]?.list?.map(category => (
+                      <li key={category.slug}>
                         <NavLink
-                          to={`${item.link}/${category.link}`}
+                          to={`/catalog/${gender}/${category.slug}`}
                           className={style.link}
                         >
                           {category.title}
