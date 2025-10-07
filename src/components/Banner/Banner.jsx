@@ -5,7 +5,6 @@ import { Container } from "../Layout/Container/Container";
 import style from "./Banner.module.scss";
 
 export const Banner = ({ data }) => {
-  // console.log("Background images:", data?.bg);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ export const Banner = ({ data }) => {
   };
 
   if (!data) return null;
-  console.log(data.bg);
+
   return (
     data && (
       <section className={style.banner} style={bannerStyle}>
