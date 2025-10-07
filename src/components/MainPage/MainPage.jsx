@@ -1,34 +1,45 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { fetchCategory, fetchGender } from "../../features/goodsSlice";
 import { setActiveGender } from "../../features/navigationSlice";
+import { Banner } from "../Banner/Banner";
 import { Goods } from "../Goods/Goods";
 
 export const MainPage = () => {
   const { gender, category } = useParams();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setActiveGender(gender));
-  }, [gender, dispatch]);
+  const { activeGender, categories } = useSelector(state => state.navigation);
+  const genderData = categories[activeGender];
 
-  useEffect(() => {
+  // Memoize the data fetching logic
+  const fetchData = useCallback(() => {
     if (gender && category) {
       dispatch(fetchCategory({ gender, category }));
-      return;
-    }
-    if (gender) {
+    } else if (gender) {
       dispatch(fetchGender(gender));
-      return;
     }
-  }, [gender, dispatch, category]);
+  }, [gender, category, dispatch]);
+
+  useEffect(() => {
+    if (gender && gender !== activeGender) {
+      dispatch(setActiveGender(gender));
+    }
+  }, [gender, activeGender, dispatch]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  // Get category data safely
+  const categoryData = genderData?.list?.find(item => item.slug === category);
 
   return (
     <>
-      <div>Баннер</div>
-      <Goods category={category} />
+      <Banner data={genderData?.banner} />
+      <Goods categoryData={categoryData} />
     </>
   );
 };
