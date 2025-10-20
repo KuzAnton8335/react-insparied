@@ -12,6 +12,16 @@ export const fetchGender = createAsyncThunk(
   }
 );
 
+export const fetchGoodsId = createAsyncThunk("goods/fetchGoodsId", async id => {
+  const response = await fetch(`${GOODS_URL}/${id}`);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch product: ${response.status}`);
+  }
+  const data = await response.json();
+  console.log("fetchGoodsId response data:", data);
+  return data;
+});
+
 export const fetchCategory = createAsyncThunk(
   "goods/fetchCategory",
   async param => {
@@ -30,10 +40,10 @@ const goodsSlice = createSlice({
   initialState: {
     status: "idle",
     goodsList: [],
+    currentProduct: null,
     error: null,
     page: 0,
     pages: 0,
-    totalCount: null,
   },
 
   extraReducers: builder => {
@@ -63,6 +73,19 @@ const goodsSlice = createSlice({
       .addCase(fetchCategory.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(fetchGoodsId.pending, state => {
+        state.productDetailsStatus = "loading";
+        state.productDetails = null; // Очищаем предыдущие данные
+      })
+      .addCase(fetchGoodsId.fulfilled, (state, action) => {
+        state.productDetailsStatus = "succeeded";
+        state.productDetails = action.payload;
+      })
+      .addCase(fetchGoodsId.rejected, (state, action) => {
+        state.productDetailsStatus = "failed";
+        state.error = action.error.message;
+        state.productDetails = null;
       });
   },
 });

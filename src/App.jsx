@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { ErrorPage } from "./components/ErrorPage/ErrorPage";
 import { MainPage } from "./components/MainPage/MainPage";
+import { ProductPage } from "./components/ProductPage/ProductPage";
 import { fetchColors } from "./features/colorSlice.js";
 import { fecthNavigation } from "./features/navigationSlice.js";
 import { Root } from "./routes/Root";
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />}>
       <Route index element={<MainPage />} />
       <Route path="catalog/:gender/:category?" element={<MainPage />} />
+      <Route path="product/:id" element={<ProductPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )

@@ -1,0 +1,178 @@
+.content {
+	display: flex;
+	gap: 20px;
+	margin-bottom: 100px;
+
+	@media (max-width: 768px) {
+		margin-bottom: 80px;
+	}
+
+	@media (max-width: 598px) {
+		flex-direction: column;
+		margin-bottom: 60px;
+	}
+}
+
+.imageContent {
+	width: 471px;
+	height: 622px;
+
+	@media (max-width: 1024px) {
+		width: 362px;
+		height: 478px;
+	}
+
+	@media (max-width: 768px) {
+		width: 250px;
+		height: 330px;
+	}
+
+	@media (max-width: 320px) {
+		width: 290px;
+		height: 383px;
+		margin-bottom: 12px;
+	}
+}
+
+.title {
+	font-weight: 400;
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #000;
+	padding-bottom: 16px;
+
+	@media (max-width: 768px) {
+		font-size: 14px;
+		padding-bottom: 12px;
+	}
+
+	@media (max-width: 598px) {
+		padding-bottom: 8px;
+	}
+}
+
+.price {
+	font-weight: 400;
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #000;
+	margin-bottom: 40px;
+	@media (max-width: 768px) {
+		font-size: 14px;
+		margin-bottom: 16px;
+	}
+}
+
+.article {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+	margin-bottom: 24px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #8a8a8a;
+
+	@media (max-width: 768px) {
+		margin-bottom: 16px;
+	}
+
+	@media (max-width: 598px) {
+		margin-bottom: 12px;
+	}
+}
+
+.articleNumber {
+	font-size: 14px;
+	color: #000;
+
+	@media (max-width: 598px) {
+		font-size: 12px;
+	}
+}
+
+.colors {
+	margin-bottom: 24px;
+	@media (max-width: 768px) {
+		margin-bottom: 16px;
+	}
+}
+
+.description {
+	margin-bottom: 40px;
+
+	@media (max-width: 768px) {
+		margin-bottom: 24px;
+	}
+
+	@media (max-width: 598px) {
+		margin-bottom: 16px;
+	}
+}
+
+.descriptionText {
+	display: block;
+	width: 450px;
+	font-size: 16px;
+
+	@media (max-width: 1024px) {
+		width: 280px;
+	}
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
+
+	@media (max-width: 598px) {
+		width: 375px;
+	}
+}
+
+.name {
+	font-size: 12px;
+	font-weight: 400;
+	color: #8a8a8a;
+	margin-bottom: 8px;
+
+	@media (max-width: 598px) {
+		font-size: 10px;
+	}
+}
+
+.buttonCount {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+
+	@media (max-width: 768px) {
+		gap: 20px;
+	}
+	@media (max-width: 598px) {
+		gap: 10px;
+	}
+}
+
+.buttonCountborder {
+	display: flex;
+	align-items: center;
+	border: 1px solid #000;
+	gap: 24px;
+	padding: 13px 16px;
+
+	@media (max-width: 768px) {
+		padding: 10px 16px;
+	}
+}
+
+.btnCart {
+	padding: 14px 41px;
+	background-color: #000;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: uppercase;
+
+	@media (max-width: 768px) {
+		padding: 12px 41px;
+		font-size: 10px;
+	}
+}

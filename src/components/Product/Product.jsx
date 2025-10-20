@@ -5,9 +5,10 @@ import { ColorList } from "../ColorList/ColorList";
 import style from "./Product.module.scss";
 
 export const Product = ({ id, pic, title, price, colors = [] }) => {
+  // `/package.jsonproduct/${id}`
   return (
     <article className={style.product}>
-      <NavLink to={`/package.jsonproduct/${id}`} className={style.link}>
+      <NavLink to={`/product/${id}`} className={style.link}>
         <img src={`${API_URL}/${pic}`} className={style.image} />
         <h3 className={style.title}>{title}</h3>
       </NavLink>

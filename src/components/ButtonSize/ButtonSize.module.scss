@@ -1,0 +1,26 @@
+.buttons {
+	margin-bottom: 24px;
+}
+
+.listSize {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.buttonSize {
+	padding: 3.5px 14px;
+	border: 1px solid #000;
+	font-size: 14px;
+	font-weight: 400;
+	transition:
+		background-color,
+		color,
+		border-color 0.5s ease-in-out;
+
+	&:hover {
+		background-color: #000;
+		color: #fff;
+		border-color: #fff;
+	}
+}
